@@ -1,9 +1,13 @@
+// capacitor.config.ts
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.abhijith.gaitbiomechanics',
-  appName: 'Gait Biomechanics',
-  webDir: 'dist'
+  appId: 'com.kinetrax.learn',
+  appName: 'KinetraxLearn',
+  webDir: 'build',
+  server: {
+    androidScheme: 'https',
+  },
 };
 
 export default config;

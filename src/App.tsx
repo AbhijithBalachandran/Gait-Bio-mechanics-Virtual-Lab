@@ -1,121 +1,216 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+// src/App.tsx
+import React from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Link,
+  useLocation,
+} from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import Home from './pages/Home';
+import ModulePage from './pages/ModulePage';
+import Dashboard from './pages/Dashboard';
+import { useGameState } from './context/GameState';
 
-function App() {
-  const [count, setCount] = useState(0)
+/* ═══════════════════════════════════════════════════════
+   Layout
+   ═══════════════════════════════════════════════════════ */
+
+const navLinks: { path: string; label: string; icon: string }[] = [
+  { path: '/', label: 'Lab', icon: '🧪' },
+  { path: '/dashboard', label: 'Dashboard', icon: '📊' },
+];
+
+function RootLayout(): React.JSX.Element {
+  const location = useLocation();
+  const { xp, level, levelTitle } = useGameState();
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* ── Top Nav ── */}
+      <nav
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '12px 24px',
+          background: 'var(--bg2)',
+          borderBottom: '1px solid var(--border)',
+          position: 'sticky',
+          top: 0,
+          zIndex: 100,
+          backdropFilter: 'blur(12px)',
+        }}
+      >
+        <Link
+          to="/"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            textDecoration: 'none',
+          }}
         >
-          Count is {count}
-        </button>
-      </section>
+          <span
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 700,
+              background: 'linear-gradient(135deg, var(--accent), var(--teal))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              fontFamily: 'var(--font)',
+            }}
+          >
+            KinetraxLearn
+          </span>
+        </Link>
 
-      <div className="ticks"></div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  fontSize: '0.875rem',
+                  fontWeight: isActive ? 600 : 400,
+                  color: isActive ? 'var(--accent)' : 'var(--text2)',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s',
+                  padding: '6px 12px',
+                  borderRadius: '8px',
+                  background: isActive ? 'rgba(79, 140, 255, 0.1)' : 'transparent',
+                }}
+              >
+                <span>{link.icon}</span>
+                <span>{link.label}</span>
+              </Link>
+            );
+          })}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+          {/* XP Badge */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '6px 14px',
+              background: 'var(--card)',
+              border: '1px solid var(--border)',
+              borderRadius: '100px',
+              fontSize: '0.75rem',
+            }}
+          >
+            <span
+              style={{
+                fontWeight: 700,
+                color: 'var(--amber)',
+                fontFamily: 'var(--mono)',
+              }}
+            >
+              Lv.{level}
+            </span>
+            <span style={{ color: 'var(--text2)' }}>|</span>
+            <span style={{ color: 'var(--teal)', fontWeight: 600 }}>
+              {xp.toLocaleString()} XP
+            </span>
+            <span
+              style={{
+                color: 'var(--text3)',
+                fontSize: '0.6875rem',
+                display: 'none',
+              }}
+              className="level-title-desktop"
+            >
+              {levelTitle}
+            </span>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </nav>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* ── Page Content ── */}
+      <main style={{ flex: 1 }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={location.pathname}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.25 }}
+          >
+            <Outlet />
+          </motion.div>
+        </AnimatePresence>
+      </main>
+
+      {/* ── Footer ── */}
+      <footer
+        style={{
+          padding: '16px 24px',
+          textAlign: 'center',
+          fontSize: '0.75rem',
+          color: 'var(--text3)',
+          borderTop: '1px solid var(--border)',
+        }}
+      >
+        KinetraxLearn © 2026 — Gait Biomechanics Virtual Laboratory
+      </footer>
+    </div>
+  );
 }
 
-export default App
+/* ═══════════════════════════════════════════════════════
+   Experiment Page Placeholder (route exists, built per-module later)
+   ═══════════════════════════════════════════════════════ */
+
+function ExperimentPage(): React.JSX.Element {
+  return (
+    <div className="container" style={{ padding: '48px 24px', textAlign: 'center' }}>
+      <h2 style={{ marginBottom: '16px' }}>🔬 Experiment Loading...</h2>
+      <p>This experiment module will be built in the next phase.</p>
+      <Link
+        to="/"
+        className="btn-primary"
+        style={{
+          display: 'inline-flex',
+          marginTop: '24px',
+          padding: '12px 24px',
+          borderRadius: '8px',
+          textDecoration: 'none',
+          color: '#fff',
+          background: 'var(--accent)',
+        }}
+      >
+        ← Back to Lab
+      </Link>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════
+   Router
+   ═══════════════════════════════════════════════════════ */
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'module/:moduleId', element: <ModulePage /> },
+      { path: 'experiment/:moduleId/:expId', element: <ExperimentPage /> },
+      { path: 'dashboard', element: <Dashboard /> },
+    ],
+  },
+]);
+
+function App(): React.JSX.Element {
+  return <RouterProvider router={router} />;
+}
+
+export default App;
