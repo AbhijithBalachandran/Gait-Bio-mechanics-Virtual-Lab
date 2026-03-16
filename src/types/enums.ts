@@ -7,24 +7,27 @@ export enum GaitPhase {
   HeelOff = 'HeelOff',
   ToeOff = 'ToeOff',
   MidSwing = 'MidSwing',
-  TerminalSwing = 'TerminalSwing'
+  TerminalSwing = 'TerminalSwing',
 }
 
 export enum SensorType {
-  Accelerometer = 'Accelerometer',
-  Gyroscope = 'Gyroscope',
-  Magnetometer = 'Magnetometer'
+  IMU_Foot = 'IMU_Foot',
+  IMU_Shank = 'IMU_Shank',
+  IMU_Thigh = 'IMU_Thigh',
+  FSR_Heel = 'FSR_Heel',
+  FSR_Toe = 'FSR_Toe',
 }
 
 export enum GravityLevel {
   Earth = 9.81,
   Moon = 1.62,
   Mars = 3.72,
-  ZeroG = 0.0
+  Jupiter = 24.79,
+  ISS = 0.0001,
 }
 
 export enum QuizType {
-  MultipleChoice = 'MultipleChoice',
-  TrueFalse = 'TrueFalse',
-  FillInTheBlank = 'FillInTheBlank'
+  MultipleChoice = 'mc',
+  DragDrop = 'dragdrop',
+  FillIn = 'fillin',
 }
