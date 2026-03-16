@@ -1,0 +1,21 @@
+{
+  "name": "KinetraxLearn",
+  "short_name": "KinetraxLearn",
+  "description": "A gamified virtual gait biomechanics laboratory",
+  "theme_color": "#0a0e1a",
+  "background_color": "#0a0e1a",
+  "display": "standalone",
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
