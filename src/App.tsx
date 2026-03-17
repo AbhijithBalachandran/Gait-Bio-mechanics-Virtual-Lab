@@ -165,31 +165,55 @@ function RootLayout(): React.JSX.Element {
 }
 
 /* ═══════════════════════════════════════════════════════
-   Experiment Page Placeholder (route exists, built per-module later)
+   Experiment Page — Routes to actual experiment components
    ═══════════════════════════════════════════════════════ */
 
+import { useParams } from 'react-router-dom';
+import {
+  GaitCycleExperiment,
+  StanceSwingExperiment,
+  DoubleSupportExperiment,
+  SpatiotemporalExperiment,
+} from './modules/m1';
+
+const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
+  'gait-cycle': GaitCycleExperiment,
+  'stance-swing': StanceSwingExperiment,
+  'double-support': DoubleSupportExperiment,
+  'spatiotemporal-params': SpatiotemporalExperiment,
+};
+
 function ExperimentPage(): React.JSX.Element {
-  return (
-    <div className="container" style={{ padding: '48px 24px', textAlign: 'center' }}>
-      <h2 style={{ marginBottom: '16px' }}>🔬 Experiment Loading...</h2>
-      <p>This experiment module will be built in the next phase.</p>
-      <Link
-        to="/"
-        className="btn-primary"
-        style={{
-          display: 'inline-flex',
-          marginTop: '24px',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          textDecoration: 'none',
-          color: '#fff',
-          background: 'var(--accent)',
-        }}
-      >
-        ← Back to Lab
-      </Link>
-    </div>
-  );
+  const { expId } = useParams<{ moduleId: string; expId: string }>();
+  const Component = expId ? EXPERIMENT_MAP[expId] : undefined;
+
+  if (!Component) {
+    return (
+      <div className="container" style={{ padding: '48px 24px', textAlign: 'center' }}>
+        <h2 style={{ marginBottom: '16px' }}>🔬 Experiment Coming Soon</h2>
+        <p style={{ color: 'var(--text2)', marginBottom: '20px' }}>
+          This experiment module is under development.
+        </p>
+        <Link
+          to="/"
+          className="btn-primary"
+          style={{
+            display: 'inline-flex',
+            marginTop: '24px',
+            padding: '12px 24px',
+            borderRadius: '8px',
+            textDecoration: 'none',
+            color: '#fff',
+            background: 'var(--accent)',
+          }}
+        >
+          ← Back to Lab
+        </Link>
+      </div>
+    );
+  }
+
+  return <Component />;
 }
 
 /* ═══════════════════════════════════════════════════════
