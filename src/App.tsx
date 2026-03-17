@@ -170,17 +170,17 @@ function RootLayout(): React.JSX.Element {
 
 import { useParams } from 'react-router-dom';
 import {
-  GaitCycleExperiment,
-  StanceSwingExperiment,
-  DoubleSupportExperiment,
-  SpatiotemporalExperiment,
-} from './modules/m1';
+  E1GaitCycle,
+  E2StanceSwing,
+  E3DoubleSupport,
+  E4SpatiotemporalParams,
+} from './modules/m1-gait-fundamentals';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
-  'gait-cycle': GaitCycleExperiment,
-  'stance-swing': StanceSwingExperiment,
-  'double-support': DoubleSupportExperiment,
-  'spatiotemporal-params': SpatiotemporalExperiment,
+  'gait-cycle': E1GaitCycle,
+  'stance-swing': E2StanceSwing,
+  'double-support': E3DoubleSupport,
+  'spatiotemporal-params': E4SpatiotemporalParams,
 };
 
 function ExperimentPage(): React.JSX.Element {
