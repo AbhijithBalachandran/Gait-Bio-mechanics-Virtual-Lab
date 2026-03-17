@@ -175,12 +175,24 @@ import {
   E3DoubleSupport,
   E4SpatiotemporalParams,
 } from './modules/m1-gait-fundamentals';
+import {
+  E1HipMotion,
+  E2KneeMotion,
+  E3AnkleMotion,
+  E4AngleAngleDiagrams,
+} from './modules/m2-joint-biomechanics';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
+  // M1 — Gait Fundamentals
   'gait-cycle': E1GaitCycle,
   'stance-swing': E2StanceSwing,
   'double-support': E3DoubleSupport,
   'spatiotemporal-params': E4SpatiotemporalParams,
+  // M2 — Joint Biomechanics
+  'hip-motion': E1HipMotion,
+  'knee-motion': E2KneeMotion,
+  'ankle-motion': E3AnkleMotion,
+  'angle-angle-diagrams': E4AngleAngleDiagrams,
 };
 
 function ExperimentPage(): React.JSX.Element {

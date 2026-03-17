@@ -31,6 +31,13 @@ export const BADGES: BadgeConfig[] = [
     criteria: 'Complete experiment: Spatiotemporal Parameters',
   },
   {
+    id: 'joint-explorer',
+    name: 'Joint Explorer',
+    description: 'Identified both knee flexion peaks within 5° of their actual positions.',
+    icon: '🦵',
+    criteria: 'Complete experiment: Knee Joint — The Double Peak',
+  },
+  {
     id: 'sensor-novice',
     name: 'Sensor Novice',
     description: 'Understood the fundamental principles of IMU sensors.',
