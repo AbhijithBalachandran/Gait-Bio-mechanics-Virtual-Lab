@@ -38,6 +38,13 @@ export const BADGES: BadgeConfig[] = [
     criteria: 'Complete experiment: Knee Joint — The Double Peak',
   },
   {
+    id: 'force-analyst',
+    name: 'Force Analyst',
+    description: 'Correctly identified all 5 key points on the GRF curve.',
+    icon: '📈',
+    criteria: 'Complete experiment: The Ground Reaction Force Curve',
+  },
+  {
     id: 'sensor-novice',
     name: 'Sensor Novice',
     description: 'Understood the fundamental principles of IMU sensors.',

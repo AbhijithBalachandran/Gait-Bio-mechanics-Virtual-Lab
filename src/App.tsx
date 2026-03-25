@@ -181,6 +181,11 @@ import {
   E3AnkleMotion,
   E4AngleAngleDiagrams,
 } from './modules/m2-joint-biomechanics';
+import {
+  E1GRFCurve,
+  E2BodyweightSpeed,
+  E3PathologicalGRF,
+} from './modules/m3-grf';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   // M1 — Gait Fundamentals
@@ -193,6 +198,10 @@ const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   'knee-motion': E2KneeMotion,
   'ankle-motion': E3AnkleMotion,
   'angle-angle-diagrams': E4AngleAngleDiagrams,
+  // M3 — Ground Reaction Forces
+  'grf-curve': E1GRFCurve,
+  'bodyweight-speed': E2BodyweightSpeed,
+  'pathological-grf': E3PathologicalGRF,
 };
 
 function ExperimentPage(): React.JSX.Element {
