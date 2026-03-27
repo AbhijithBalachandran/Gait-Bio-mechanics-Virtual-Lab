@@ -186,6 +186,13 @@ import {
   E2BodyweightSpeed,
   E3PathologicalGRF,
 } from './modules/m3-grf';
+import {
+  E1IMUPrinciples,
+  E2FootIMU,
+  E3ShankThighIMU,
+  E4SensorFusion,
+  E5SignalProcessing,
+} from './modules/m4-imu';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   // M1 — Gait Fundamentals
@@ -202,6 +209,12 @@ const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   'grf-curve': E1GRFCurve,
   'bodyweight-speed': E2BodyweightSpeed,
   'pathological-grf': E3PathologicalGRF,
+  // M4 — IMU Sensor World
+  'imu-principles': E1IMUPrinciples,
+  'foot-imu': E2FootIMU,
+  'shank-thigh-imu': E3ShankThighIMU,
+  'sensor-fusion': E4SensorFusion,
+  'signal-processing': E5SignalProcessing,
 };
 
 function ExperimentPage(): React.JSX.Element {
