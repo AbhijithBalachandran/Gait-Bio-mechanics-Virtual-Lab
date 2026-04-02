@@ -257,6 +257,7 @@ export const EXPERIMENTS: ExperimentConfig[] = [
     title: 'Algorithm Showdown',
     description: 'Compare detection algorithms head-to-head on accuracy and latency.',
     xpReward: 300,
+    badgeId: 'algorithm-judge',
     estimatedTime: '15 min',
     difficulty: 'Advanced',
   },

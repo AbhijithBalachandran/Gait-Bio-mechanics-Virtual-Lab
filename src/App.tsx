@@ -199,6 +199,12 @@ import {
   E3FsrEventDetection,
   E4CombinedSensors,
 } from './modules/m5-fsr';
+import {
+  E1ThresholdDetection,
+  E2PeakDetection,
+  E3StrideSegmentation,
+  E4AlgorithmShowdown,
+} from './modules/m6-event-detection';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   // M1 — Gait Fundamentals
@@ -226,6 +232,11 @@ const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   'heel-toe-pressure': E2HeelToePressure,
   'fsr-event-detection': E3FsrEventDetection,
   'combined-sensors': E4CombinedSensors,
+  // M6 — Gait Event Detection
+  'threshold-detection': E1ThresholdDetection,
+  'peak-detection': E2PeakDetection,
+  'stride-segmentation': E3StrideSegmentation,
+  'algorithm-showdown': E4AlgorithmShowdown,
 };
 
 function ExperimentPage(): React.JSX.Element {

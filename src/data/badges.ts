@@ -107,6 +107,13 @@ export const BADGES: BadgeConfig[] = [
     icon: '🔗',
     criteria: 'Complete experiment: Combined Sensor Systems',
   },
+  {
+    id: 'algorithm-judge',
+    name: 'Algorithm Judge',
+    description: 'Successfully matched gait event detection algorithms to their optimal scenarios.',
+    icon: '⚖️',
+    criteria: 'Complete experiment: Algorithm Showdown',
+  },
 ];
 
 export function getBadgeById(id: string): BadgeConfig | undefined {
