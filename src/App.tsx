@@ -211,6 +211,11 @@ import {
   E3AntalgicGait,
   E4MysteryGait,
 } from './modules/m7-pathological';
+import {
+  E1GravityPhysics,
+  E2AntigravityRehab,
+  E3FinalBoss,
+} from './modules/m8-antigravity';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   // M1 — Gait Fundamentals
@@ -248,6 +253,10 @@ const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   'hemiplegic-gait': E2HemiplegicGait,
   'antalgic-gait': E3AntalgicGait,
   'mystery-gait': E4MysteryGait,
+  // M8 — Anti-Gravity
+  'gravity-physics': E1GravityPhysics,
+  'antigravity-rehab': E2AntigravityRehab,
+  'final-boss': E3FinalBoss,
 };
 
 function ExperimentPage(): React.JSX.Element {

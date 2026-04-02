@@ -303,10 +303,7 @@ export const EXPERIMENTS: ExperimentConfig[] = [
     estimatedTime: '17 min',
     difficulty: 'Advanced',
   },
-
-  /* ═══════════════════════════════════════════════════════
-     Module 8 — Anti-Gravity Lab
-     ═══════════════════════════════════════════════════════ */
+  // Module 8 (Anti-Gravity Lab)
   {
     id: 'gravity-physics',
     moduleId: 'm8',

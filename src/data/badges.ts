@@ -94,6 +94,13 @@ export const BADGES: BadgeConfig[] = [
     criteria: 'Complete experiment: Parkinsonian Gait',
   },
   {
+    id: 'rehab-designer',
+    name: 'Rehab Designer',
+    description: 'Successfully designed a progressive anti-gravity rehab protocol.',
+    icon: '🩺',
+    criteria: 'Complete experiment: Anti-Gravity Treadmill',
+  },
+  {
     id: 'antigravity-pioneer',
     name: 'Anti-Gravity Pioneer',
     description: 'Explored gait biomechanics under altered gravitational conditions.',
