@@ -425,7 +425,11 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
                   strokeDasharray={sensor ? 'none' : '4,4'}
                   style={{ cursor: 'pointer', transition: 'all 0.3s' }}
                   onDragOver={(e) => e.preventDefault()}
-                  onDrop={() => handleDrop(zone.id)}
+                  onDragEnter={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    handleDrop(zone.id);
+                  }}
                 />
                 {sensor && (
                   <text x={zone.x} y={zone.y + 4} textAnchor="middle" fontSize={10} fill={sensor.color} fontWeight={600}>
@@ -493,7 +497,10 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
               <div
                 key={sensor.id}
                 draggable={!isPlaced}
-                onDragStart={() => handleDragStart(sensor.id)}
+                onDragStart={(e) => {
+                  e.dataTransfer.setData('text/plain', sensor.id);
+                  handleDragStart(sensor.id);
+                }}
                 style={{
                   padding: '6px 12px',
                   borderRadius: '8px',
