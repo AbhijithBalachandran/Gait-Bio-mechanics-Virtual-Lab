@@ -82,6 +82,7 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
   // Sensor placement state
   const [placements, setPlacements] = useState<Record<string, DropZone | null>>({});
   const [draggedSensor, setDraggedSensor] = useState<string | null>(null);
+  const [activeSensor, setActiveSensor] = useState<string | null>(null);
   const [dropError, setDropError] = useState<{ zone: DropZone; message: string } | null>(null);
   const [dropSuccess, setDropSuccess] = useState<DropZone | null>(null);
 
@@ -126,8 +127,9 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
 
   const handleDrop = useCallback(
     (zoneId: DropZone): void => {
-      if (!draggedSensor) return;
-      const sensor = SENSORS.find((s) => s.id === draggedSensor);
+      const targetSensorId = draggedSensor || activeSensor;
+      if (!targetSensorId) return;
+      const sensor = SENSORS.find((s) => s.id === targetSensorId);
       if (!sensor) return;
 
       if (sensor.validZone === zoneId) {
@@ -140,8 +142,9 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
         setTimeout(() => setDropError(null), 2500);
       }
       setDraggedSensor(null);
+      setActiveSensor(null);
     },
-    [draggedSensor]
+    [draggedSensor, activeSensor]
   );
 
   // ── Check all required sensors placed ──
@@ -424,6 +427,9 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
                   strokeWidth={isError || isSuccess ? 2.5 : 1.5}
                   strokeDasharray={sensor ? 'none' : '4,4'}
                   style={{ cursor: 'pointer', transition: 'all 0.3s' }}
+                  onClick={() => {
+                    if (activeSensor) handleDrop(zone.id);
+                  }}
                   onDragOver={(e) => e.preventDefault()}
                   onDragEnter={(e) => e.preventDefault()}
                   onDrop={(e) => {
@@ -488,6 +494,9 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
         </AnimatePresence>
 
         {/* Sensor tray */}
+        <p style={{ fontSize: '0.75rem', color: 'var(--text3)', textAlign: 'center', marginBottom: '-8px' }}>
+          Drag or click a sensor, then click its destination
+        </p>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
           {SENSORS.map((sensor) => {
             const isPlaced = placements[sensor.id] !== undefined && placements[sensor.id] !== null;
@@ -497,6 +506,11 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
               <div
                 key={sensor.id}
                 draggable={!isPlaced}
+                onClick={() => {
+                  if (!isPlaced) {
+                    setActiveSensor(activeSensor === sensor.id ? null : sensor.id);
+                  }
+                }}
                 onDragStart={(e) => {
                   e.dataTransfer.setData('text/plain', sensor.id);
                   handleDragStart(sensor.id);
@@ -504,8 +518,9 @@ function HumanModel({ requiredSensors, onDataGenerated, compact = false }: Human
                 style={{
                   padding: '6px 12px',
                   borderRadius: '8px',
-                  background: isPlaced ? sensor.color + '20' : 'var(--card)',
-                  border: `1px solid ${isPlaced ? sensor.color : 'var(--border)'}`,
+                  background: isPlaced ? sensor.color + '20' : (activeSensor === sensor.id ? sensor.color + '40' : 'var(--card)'),
+                  border: `1px solid ${isPlaced ? sensor.color : (activeSensor === sensor.id ? sensor.color : 'var(--border)')}`,
+                  boxShadow: activeSensor === sensor.id ? `0 0 0 2px ${sensor.color}60` : 'none',
                   fontSize: '0.6875rem',
                   fontWeight: 600,
                   color: isPlaced ? sensor.color : 'var(--text2)',
