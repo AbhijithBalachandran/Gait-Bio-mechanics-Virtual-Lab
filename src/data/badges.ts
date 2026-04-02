@@ -84,6 +84,13 @@ export const BADGES: BadgeConfig[] = [
     name: 'Clinical Detective',
     description: 'Identified pathological gait patterns with clinical reasoning.',
     icon: '🩺',
+    criteria: 'Complete experiment: Mystery Diagnosis',
+  },
+  {
+    id: 'parkinsons-analyst',
+    name: 'Parkinson\'s Analyst',
+    description: 'Identified all hallmark sensor features of Parkinsonian gait.',
+    icon: '🧠',
     criteria: 'Complete experiment: Parkinsonian Gait',
   },
   {

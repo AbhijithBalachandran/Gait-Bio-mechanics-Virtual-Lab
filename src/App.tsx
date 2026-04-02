@@ -205,6 +205,12 @@ import {
   E3StrideSegmentation,
   E4AlgorithmShowdown,
 } from './modules/m6-event-detection';
+import {
+  E1ParkinsonianGait,
+  E2HemiplegicGait,
+  E3AntalgicGait,
+  E4MysteryGait,
+} from './modules/m7-pathological';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   // M1 — Gait Fundamentals
@@ -237,6 +243,11 @@ const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   'peak-detection': E2PeakDetection,
   'stride-segmentation': E3StrideSegmentation,
   'algorithm-showdown': E4AlgorithmShowdown,
+  // M7 — Pathological Gait
+  'parkinsonian-gait': E1ParkinsonianGait,
+  'hemiplegic-gait': E2HemiplegicGait,
+  'antalgic-gait': E3AntalgicGait,
+  'mystery-gait': E4MysteryGait,
 };
 
 function ExperimentPage(): React.JSX.Element {
