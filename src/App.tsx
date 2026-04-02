@@ -193,6 +193,12 @@ import {
   E4SensorFusion,
   E5SignalProcessing,
 } from './modules/m4-imu';
+import {
+  E1FsrPrinciples,
+  E2HeelToePressure,
+  E3FsrEventDetection,
+  E4CombinedSensors,
+} from './modules/m5-fsr';
 
 const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   // M1 — Gait Fundamentals
@@ -215,6 +221,11 @@ const EXPERIMENT_MAP: Record<string, React.ComponentType> = {
   'shank-thigh-imu': E3ShankThighIMU,
   'sensor-fusion': E4SensorFusion,
   'signal-processing': E5SignalProcessing,
+  // M5 — FSR Foot Pressure Lab
+  'fsr-principles': E1FsrPrinciples,
+  'heel-toe-pressure': E2HeelToePressure,
+  'fsr-event-detection': E3FsrEventDetection,
+  'combined-sensors': E4CombinedSensors,
 };
 
 function ExperimentPage(): React.JSX.Element {

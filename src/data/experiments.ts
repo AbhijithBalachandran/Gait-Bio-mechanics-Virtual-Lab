@@ -216,6 +216,7 @@ export const EXPERIMENTS: ExperimentConfig[] = [
     title: 'Combined Sensor Systems',
     description: 'Integrate FSR data with IMU signals for comprehensive gait analysis.',
     xpReward: 300,
+    badgeId: 'dual-sensor-master',
     estimatedTime: '16 min',
     difficulty: 'Advanced',
   },

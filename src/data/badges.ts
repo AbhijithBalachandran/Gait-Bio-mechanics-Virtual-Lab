@@ -100,6 +100,13 @@ export const BADGES: BadgeConfig[] = [
     icon: '🏗️',
     criteria: 'Complete experiment: Final Boss: Full System',
   },
+  {
+    id: 'dual-sensor-master',
+    name: 'Dual Sensor Master',
+    description: 'Mastered the integration and complementary benefits of IMU and FSR sensors.',
+    icon: '🔗',
+    criteria: 'Complete experiment: Combined Sensor Systems',
+  },
 ];
 
 export function getBadgeById(id: string): BadgeConfig | undefined {
